@@ -7,9 +7,6 @@ export function Logomark(props: React.ComponentPropsWithoutRef<'svg'>) {
     x="0px"
     y="0px"
     viewBox="0 0 230.453 230.453"
-    style={{
-      enableBackground: "new 0 0 230.453 230.453",
-    }}
     xmlSpace="preserve"
     {...props}
   >
