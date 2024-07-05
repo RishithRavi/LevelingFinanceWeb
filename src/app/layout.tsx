@@ -1,6 +1,7 @@
 import { type Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import clsx from 'clsx'
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 import '@/styles/tailwind.css'
 
@@ -27,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={clsx('bg-gray-50 antialiased scroll-smooth', inter.variable)}>
       <body>{children}</body>
+      <GoogleAnalytics gaId='G-XTHEJZRFFL' />
     </html>
   )
 }
