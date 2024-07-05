@@ -49,7 +49,7 @@ function MobileNavLink(
   return (
     <PopoverButton
       as={Link}
-      className="block text-base leading-7 tracking-tight text-gray-700"
+      className="block text-base leading-7 tracking-tight text-gray-700 "
       {...props}
     />
   )
@@ -73,7 +73,7 @@ export function Header() {
               {({ open }) => (
                 <>
                   <PopoverButton
-                    className="relative z-10 -m-2 inline-flex items-center rounded-lg stroke-gray-900 p-2 hover:bg-gray-200/50 hover:stroke-gray-600 active:stroke-gray-900 ui-not-focus-visible:outline-none"
+                    className="relative z-10 -m-2 inline-flex items-center rounded-lg stroke-gray-900 p-2 hover:bg-gray-200/50 hover:stroke-gray-600 active:stroke-gray-900 ui-not-focus-visible:outline-none "
                     aria-label="Toggle site navigation"
                   >
                     {({ open }) =>
