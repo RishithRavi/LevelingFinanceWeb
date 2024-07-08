@@ -65,5 +65,5 @@ export default {
       },
     },
   },
-  plugins: [formsPlugin, headlessuiPlugin],
+  plugins: [formsPlugin, headlessuiPlugin,  require('@tailwindcss/aspect-ratio'),],
 } satisfies Config
