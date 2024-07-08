@@ -115,7 +115,7 @@ export function Hero() {
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4">
               <AppStoreLink />
               <Button
-                href="https://youtu.be/Tr6MMsoWAog"
+                href="https://youtu.be/xVrOKgVWZIg"
                 variant="outline"
               >
                 <PlayIcon className="h-6 w-6 flex-none" />
