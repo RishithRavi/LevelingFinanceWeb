@@ -6,7 +6,7 @@ import { Container } from '@/components/Container'
 import { TextField } from '@/components/Fields'
 import { Logomark } from '@/components/Logo'
 import { NavLinks } from '@/components/NavLinks'
-import qrCode from '@/images/qr-code.svg'
+import qrCode from '@/images/qrcode_www.youtube.com.png'
 
 function QrCodeBorder(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
