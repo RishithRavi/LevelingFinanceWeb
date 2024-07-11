@@ -3,8 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "fastapi-dev": "set PYTHONIOENCODING=utf-8 && pip3 install -r requirements.txt && fastapi run api/index.py --host 127.0.0.1 --port 8000",
-    "dev": "concurrently \"npx next dev\" \"npm run fastapi-dev\"",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -20,7 +19,6 @@
     "@types/react-dom": "^18.2.18",
     "autoprefixer": "^10.4.12",
     "clsx": "^2.1.0",
-    "concurrently": "^8.2.2",
     "framer-motion": "^10.15.0",
     "next": "^14.0.4",
     "react": "^18.2.0",
