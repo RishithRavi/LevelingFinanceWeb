@@ -2,7 +2,7 @@ import { type Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import clsx from 'clsx'
 import { GoogleAnalytics } from '@next/third-parties/google'
-
+import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 import '@/styles/tailwind.css'
 
 const inter = Inter({
@@ -26,9 +26,23 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={clsx('bg-gray-50 antialiased scroll-smooth', inter.variable)}>
-      <body>{children}</body>
+    <ClerkProvider>
+          <html lang="en" className={clsx('bg-gray-50 antialiased scroll-smooth', inter.variable)}>
+        <body>
+          <header>
+            {/* <SignedOut>
+              <SignInButton />
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn> */}
+          </header>
+          <main>
+            {children}
+          </main>
+        </body>
       <GoogleAnalytics gaId='G-XTHEJZRFFL' />
-    </html>
+      </html>
+    </ClerkProvider>
   )
 }

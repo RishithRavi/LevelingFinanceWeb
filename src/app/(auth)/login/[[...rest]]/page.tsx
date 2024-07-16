@@ -4,13 +4,14 @@ import Link from 'next/link';
 import { AuthLayout } from '@/components/AuthLayout';
 import { Button } from '@/components/Button';
 import { Input } from '@headlessui/react';
-import { useSignUp } from "@clerk/clerk-react";
+import { useSignIn, useSignUp } from "@clerk/clerk-react";
 import { useRouter } from 'next/navigation';
 
-export default function SignUp() {
+export default function Login() {
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState(new Array(6).fill(''));
   const [verifying, setVerifying] = useState(false);
+  const { isLoaded: isSignInLoaded, signIn, setActive: setSignInActive } = useSignIn();
   const { isLoaded: isSignUpLoaded, signUp, setActive: setSignUpActive } = useSignUp();
   const router = useRouter();
   const otpRefs = useRef([]);
@@ -32,19 +33,31 @@ export default function SignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!isSignUpLoaded || !signUp) return;
+    if (!isSignInLoaded || !signIn) return;
 
     try {
-      // Start the sign-up process using the phone number method
-      await signUp.create({
-        phoneNumber: phone,
+      // Start the sign-in process using the phone number method
+      const { supportedFirstFactors } = await signIn.create({
+        identifier: phone,
       });
 
-      // Send the OTP code to the user
-      await signUp.preparePhoneNumberVerification();
+      // Filter the returned array to find the 'phone_code' entry
+      const isPhoneCodeFactor = (factor) => factor.strategy === 'phone_code';
+      const phoneCodeFactor = supportedFirstFactors?.find(isPhoneCodeFactor);
 
-      // Set verifying to true to display second form and capture the OTP code
-      setVerifying(true);
+      if (phoneCodeFactor) {
+        // Grab the phoneNumberId
+        const { phoneNumberId } = phoneCodeFactor;
+
+        // Send the OTP code to the user
+        await signIn.prepareFirstFactor({
+          strategy: 'phone_code',
+          phoneNumberId,
+        });
+
+        // Set verifying to true to display second form and capture the OTP code
+        setVerifying(true);
+      }
     } catch (err) {
       console.error('Error:', JSON.stringify(err, null, 2));
     }
@@ -53,21 +66,22 @@ export default function SignUp() {
   const handleVerification = async (e) => {
     e.preventDefault();
 
-    if (!isSignUpLoaded || !signUp) return;
+    if (!isSignInLoaded || !signIn) return;
 
     try {
       // Use the code provided by the user and attempt verification
       const code = otp.join('');
-      const signUpAttempt = await signUp.attemptPhoneNumberVerification({
+      const signInAttempt = await signIn.attemptFirstFactor({
+        strategy: 'phone_code',
         code,
       });
 
       // If verification was completed, set the session to active and redirect the user
-      if (signUpAttempt.status === 'complete') {
-        await setSignUpActive({ session: signUpAttempt.createdSessionId });
+      if (signInAttempt.status === 'complete') {
+        await setSignInActive({ session: signInAttempt.createdSessionId });
         router.push('/');
       } else {
-        console.error(signUpAttempt);
+        console.error(signInAttempt);
       }
     } catch (err) {
       console.error('Error:', JSON.stringify(err, null, 2));
@@ -96,14 +110,14 @@ export default function SignUp() {
 
   return (
     <AuthLayout
-      title="Sign up for an account"
+      title="Sign in to account"
       subtitle={
         <>
-          Already registered?{' '}
-          <Link href="/login" className="text-indigo-600">
-            Sign in
+          Don’t have an account?{' '}
+          <Link href="/register" className="text-indigo-600">
+            Sign up
           </Link>{' '}
-          to your account.
+          for free.
         </>
       }
     >
@@ -141,7 +155,7 @@ export default function SignUp() {
             />
           </div>
           <Button type="submit" color="indigo" className="mt-8 w-full">
-            Sign up for an account
+            Sign in to your account
           </Button>
         </form>
       )}

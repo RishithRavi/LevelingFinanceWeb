@@ -13,6 +13,7 @@ import { Button } from '@/components/Button'
 import { Container } from '@/components/Container'
 import { Logo } from '@/components/Logo'
 import { NavLinks } from '@/components/NavLinks'
+import { useClerk } from '@clerk/nextjs'
 
 function MenuIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -56,6 +57,7 @@ function MobileNavLink(
 }
 
 export function Header() {
+  const clerk = useClerk()
   return (
     <header>
       <nav>
@@ -120,9 +122,15 @@ export function Header() {
                             <MobileNavLink href="/#faqs">FAQs</MobileNavLink>
                           </div>
                           <div className="mt-8 flex flex-col gap-4">
-                            <Button href="/login" variant="outline">
+                            {
+                            clerk.session?.user ?
+                            <Button href="/login" variant="outline"> 
                               Log in
-                            </Button>
+                            </Button> :
+                            <Button href="/login" variant="outline"> 
+                            Log Out
+                          </Button>
+                            }
                             <Button href="#">Download the app</Button>
                           </div>
                         </PopoverPanel>
@@ -131,10 +139,18 @@ export function Header() {
                   </AnimatePresence>
                 </>
               )}
-            </Popover>
-            <Button href="/login" variant="outline" className="hidden lg:block">
-              Log in
-            </Button>
+            </Popover>{
+
+            }
+                                        {
+                            !clerk.session?.user ?
+                            <Button href="/login" variant="outline"> 
+                              Log in
+                            </Button> :
+                            <Button onClick={()=>{clerk.signOut()}} variant="outline"> 
+                            Log Out
+                          </Button>
+                            }
             <Button href="#" className="hidden lg:block">
               Download
             </Button>
