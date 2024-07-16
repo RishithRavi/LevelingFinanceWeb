@@ -151,8 +151,8 @@ export function Header() {
                             Log Out
                           </Button>
                             }
-            <Button href="#" className="hidden lg:block">
-              Download
+            <Button href="/dashboard" className="hidden lg:block">
+              Dashboard
             </Button>
           </div>
         </Container>
