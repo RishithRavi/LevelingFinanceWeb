@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
   Text
 } from 'recharts';
-import Loader from './loader';
+import Loader from './Loader';
 
 const StockAreaChart = () => {
   const [token, setToken] = useState('');

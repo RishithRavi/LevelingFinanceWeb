@@ -1,6 +1,6 @@
 import { Button } from '@headlessui/react'
 import { useEffect, useState } from 'react'
-import Loader from './loader'
+import Loader from './Loader'
 
 // components/Leaderboard.js
 // const leaderboard = [

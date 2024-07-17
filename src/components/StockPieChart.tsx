@@ -6,8 +6,7 @@ import {
   Sector,
   ResponsiveContainer
 } from 'recharts';
-import Loader from './loader';
-import { useSpring, animated } from '@react-spring/web';
+import Loader from './Loader';
 
 const StockPieChart = () => {
   const [token, setToken] = useState('');
