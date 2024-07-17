@@ -4,26 +4,30 @@ import {
   PieChart,
   Pie,
   Sector,
-  ResponsiveContainer
+  ResponsiveContainer,
 } from 'recharts';
 import Loader from './Loader';
 
-const StockPieChart = () => {
-  const [token, setToken] = useState('');
+interface tPieData 
+  { name: any;
+    value: any; }
+
+
+const StockPieChart: React.FC = () => {
   const [loading, setLoading] = useState(true);
-  const [pieData, setPieData] = useState([]);
+  const [pieData, setPieData] = useState<tPieData[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
   const { session, user } = useClerk();
 
   useEffect(() => {
-    const fetchData = async (token) => {
+    const fetchData = async (token: any) => {
       setLoading(true);
       try {
         const url = `/api/user/${user?.primaryPhoneNumber?.phoneNumber}/stocks/current-value/`;
         const response = await fetch(url, {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
           },
         });
         if (!response.ok) {
@@ -40,21 +44,32 @@ const StockPieChart = () => {
     };
 
     session?.getToken().then((x) => {
-      setToken(x);
-      fetchData(x);
+      return fetchData(x);
     });
   }, [session, user]);
 
-  const transformPieData = (data) => {
+  const transformPieData = (data: any[]) => {
     return data.map((item) => ({
       name: item.ticker,
       value: item.current_value,
     }));
   };
 
-  const renderActiveShape = (props) => {
+  const renderActiveShape = (props: any) => {
     const RADIAN = Math.PI / 180;
-    const { cx, cy, midAngle, innerRadius, outerRadius, startAngle, endAngle, fill, payload, percent, value } = props;
+    const {
+      cx,
+      cy,
+      midAngle,
+      innerRadius,
+      outerRadius,
+      startAngle,
+      endAngle,
+      fill,
+      payload,
+      percent,
+      value,
+    } = props;
     const sin = Math.sin(-RADIAN * midAngle);
     const cos = Math.cos(-RADIAN * midAngle);
     const sx = cx + (outerRadius + 10) * cos;
@@ -90,19 +105,30 @@ const StockPieChart = () => {
         />
         <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
         <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333">{`$${value.toFixed(2)}`}</text>
-        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} dy={18} textAnchor={textAnchor} fill="#999">
+        <text
+          x={ex + (cos >= 0 ? 1 : -1) * 12}
+          y={ey}
+          textAnchor={textAnchor}
+          fill="#333"
+        >{`$${value.toFixed(2)}`}</text>
+        <text
+          x={ex + (cos >= 0 ? 1 : -1) * 12}
+          y={ey}
+          dy={18}
+          textAnchor={textAnchor}
+          fill="#999"
+        >
           {`(% of Holdings ${(percent * 100).toFixed(2)}%)`}
         </text>
       </g>
     );
   };
 
-  const onPieEnter = (_, index) => {
+  const onPieEnter = (_: any, index: number) => {
     setActiveIndex(index);
   };
 
-  if (loading) return <Loader />
+  if (loading) return <Loader />;
 
   return (
     <ResponsiveContainer width="100%" height={450}>

@@ -17,7 +17,7 @@ export default function Home() {
     <div className="flex h-screen bg-white dark:bg-gray-900 bg-cover">
       <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
       <div className="flex flex-1 flex-col xl:pl-72">
-        <HeaderDash setSidebarOpen={setSidebarOpen} role={clerk.user?.unsafeMetadata['role']} />{
+        <HeaderDash setSidebarOpen={setSidebarOpen} role={String(clerk.user?.unsafeMetadata['role'])} />{
           clerk.user?.unsafeMetadata['role'] === 'teacher' ?
         <main className="flex-1 px-4 py-8 sm:px-6 lg:px-8">
           <OverviewDashboard />
