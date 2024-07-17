@@ -1,62 +1,57 @@
-import { useClerk } from '@clerk/nextjs';
-import React, { useEffect, useState } from 'react';
-import {
-  PieChart,
-  Pie,
-  Sector,
-  ResponsiveContainer,
-} from 'recharts';
-import Loader from './Loader';
+import { useClerk } from '@clerk/nextjs'
+import React, { useEffect, useState } from 'react'
+import { PieChart, Pie, Sector, ResponsiveContainer } from 'recharts'
+import Loader from './Loader'
 
-interface tPieData 
-  { name: any;
-    value: any; }
-
+interface tPieData {
+  name: any
+  value: any
+}
 
 const StockPieChart: React.FC = () => {
-  const [loading, setLoading] = useState(true);
-  const [pieData, setPieData] = useState<tPieData[]>([]);
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [loading, setLoading] = useState(true)
+  const [pieData, setPieData] = useState<tPieData[]>([])
+  const [activeIndex, setActiveIndex] = useState(0)
 
-  const { session, user } = useClerk();
+  const { session, user } = useClerk()
 
   useEffect(() => {
     const fetchData = async (token: any) => {
-      setLoading(true);
+      setLoading(true)
       try {
-        const url = `/api/user/${user?.primaryPhoneNumber?.phoneNumber}/stocks/current-value/`;
-        const response = await fetch(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        const response = await fetch(
+          `https://api.levelingfinance.com/api/user/${user?.primaryPhoneNumber?.phoneNumber}/stocks/current-value`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
           },
-        });
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const json = await response.json();
-        const transformedPieData = transformPieData(json);
-        setPieData(transformedPieData);
+        )
+        const json = await response.json()
+        const transformedPieData = transformPieData(json)
+        setPieData(transformedPieData)
       } catch (error) {
-        console.error('Fetch error:', error);
+        console.error('Fetch error:', error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
     session?.getToken().then((x) => {
-      return fetchData(x);
-    });
-  }, [session, user]);
+      return fetchData(x)
+    })
+  }, [session, user])
 
   const transformPieData = (data: any[]) => {
     return data.map((item) => ({
       name: item.ticker,
       value: item.current_value,
-    }));
-  };
+    }))
+  }
 
   const renderActiveShape = (props: any) => {
-    const RADIAN = Math.PI / 180;
+    const RADIAN = Math.PI / 180
     const {
       cx,
       cy,
@@ -69,16 +64,16 @@ const StockPieChart: React.FC = () => {
       payload,
       percent,
       value,
-    } = props;
-    const sin = Math.sin(-RADIAN * midAngle);
-    const cos = Math.cos(-RADIAN * midAngle);
-    const sx = cx + (outerRadius + 10) * cos;
-    const sy = cy + (outerRadius + 10) * sin;
-    const mx = cx + (outerRadius + 30) * cos;
-    const my = cy + (outerRadius + 30) * sin;
-    const ex = mx + (cos >= 0 ? 1 : -1) * 22;
-    const ey = my;
-    const textAnchor = cos >= 0 ? 'start' : 'end';
+    } = props
+    const sin = Math.sin(-RADIAN * midAngle)
+    const cos = Math.cos(-RADIAN * midAngle)
+    const sx = cx + (outerRadius + 10) * cos
+    const sy = cy + (outerRadius + 10) * sin
+    const mx = cx + (outerRadius + 30) * cos
+    const my = cy + (outerRadius + 30) * sin
+    const ex = mx + (cos >= 0 ? 1 : -1) * 22
+    const ey = my
+    const textAnchor = cos >= 0 ? 'start' : 'end'
 
     return (
       <g>
@@ -103,7 +98,11 @@ const StockPieChart: React.FC = () => {
           outerRadius={outerRadius + 10}
           fill={fill}
         />
-        <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
+        <path
+          d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`}
+          stroke={fill}
+          fill="none"
+        />
         <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
         <text
           x={ex + (cos >= 0 ? 1 : -1) * 12}
@@ -121,14 +120,14 @@ const StockPieChart: React.FC = () => {
           {`(% of Holdings ${(percent * 100).toFixed(2)}%)`}
         </text>
       </g>
-    );
-  };
+    )
+  }
 
   const onPieEnter = (_: any, index: number) => {
-    setActiveIndex(index);
-  };
+    setActiveIndex(index)
+  }
 
-  if (loading) return <Loader />;
+  if (loading) return <Loader />
 
   return (
     <ResponsiveContainer width="100%" height={450}>
@@ -147,7 +146,7 @@ const StockPieChart: React.FC = () => {
         />
       </PieChart>
     </ResponsiveContainer>
-  );
-};
+  )
+}
 
-export default StockPieChart;
+export default StockPieChart
