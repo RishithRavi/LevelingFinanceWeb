@@ -15,6 +15,7 @@ import {
   Bars3Icon,
 } from '@heroicons/react/24/outline'
 import { Logomark } from './Logo'
+import { useRouter } from 'next/navigation'
 
 const navigation = [
   { name: 'Overview', href: '#', icon: ChartBarSquareIcon, current: true },
@@ -28,9 +29,10 @@ function classNames(...classes) {
 }
 
 export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
+  const router = useRouter()
   return (
     <>
-      <Transition.Root show={sidebarOpen} as={Fragment}>
+      <Transition show={sidebarOpen} as={Fragment}>
         <Dialog
           as="div"
           className="relative z-50 xl:hidden"
@@ -59,28 +61,30 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
               leaveTo="-translate-x-full"
             >
               <DialogPanel className="relative flex w-full max-w-xs flex-1 flex-col bg-white p-6 ring-1 ring-white/10 dark:bg-gray-900">
-                <div className="flex items-center justify-between">
-                  <div className="w-108 flex items-center space-x-reverse">
-                    <svg viewBox="0 0 55 40" aria-hidden="true">
-                      <Logomark
-                        width="40"
-                        height="40"
-                        className="fill-indigo-500"
-                      />
-                    </svg>
-                    <h1 className="text-xl font-semibold text-white">
-                      Leveling Finance
-                    </h1>
+                <a href="/">
+                  <div className="flex items-center justify-between">
+                    <div className="w-108 flex items-center space-x-reverse">
+                      <svg viewBox="0 0 55 40" aria-hidden="true">
+                        <Logomark
+                          width="40"
+                          height="40"
+                          className="fill-indigo-500"
+                        />
+                      </svg>
+                      <h1 className="text-xl font-semibold text-white">
+                        Leveling Finance
+                      </h1>
+                    </div>
+                    <button
+                      type="button"
+                      className="-m-2.5 p-2.5 text-gray-400"
+                      onClick={() => setSidebarOpen(false)}
+                    >
+                      <span className="sr-only">Close sidebar</span>
+                      <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+                    </button>
                   </div>
-                  <button
-                    type="button"
-                    className="-m-2.5 p-2.5 text-gray-400"
-                    onClick={() => setSidebarOpen(false)}
-                  >
-                    <span className="sr-only">Close sidebar</span>
-                    <XMarkIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div>
+                </a>
                 <nav className="mt-8">
                   <div className="space-y-1">
                     {navigation.map((item) => (
@@ -107,19 +111,25 @@ export default function Sidebar({ sidebarOpen, setSidebarOpen }) {
             </TransitionChild>
           </div>
         </Dialog>
-      </Transition.Root>
+      </Transition>
 
       <div className="hidden xl:fixed xl:inset-y-0 xl:flex xl:w-72 xl:flex-col">
         <div className="flex flex-grow flex-col bg-white p-6 ring-1 ring-white/10 dark:bg-gray-900">
           <div className="flex items-center justify-between">
-            <div className="w-108 flex items-center space-x-reverse">
-              <svg viewBox="0 0 55 40" aria-hidden="true">
-                <Logomark width="40" height="40" className="fill-indigo-500" />
-              </svg>
-              <h1 className="text-xl font-bold italic text-black dark:text-white">
-                Leveling Finance
-              </h1>
-            </div>
+            <a href="/">
+              <div className="w-108 flex items-center space-x-reverse">
+                <svg viewBox="0 0 55 40" aria-hidden="true">
+                  <Logomark
+                    width="40"
+                    height="40"
+                    className="fill-indigo-500"
+                  />
+                </svg>
+                <h1 className="text-xl font-bold italic text-black dark:text-white">
+                  Leveling Finance
+                </h1>
+              </div>
+            </a>
           </div>
           <nav className="mt-8 flex-1">
             <div className="space-y-1">

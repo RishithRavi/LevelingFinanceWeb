@@ -53,43 +53,10 @@ const StockAreaChart = () => {
     }
 
     const transformData = (data: any[]) => {
-      const now = new Date()
-      const earliestDate = new Date(data[0].date)
-      const diffTime = Math.abs(now.getTime() - earliestDate.getTime())
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
-
-      if (diffDays <= 90) {
-        return data.map((item) => ({
-          name: formatDate(item.date),
-          portfolio_value: item.portfolio_value,
-        }))
-      } else if (diffDays <= 365) {
-        return data
-          .filter((_, index) => index % 7 === 0)
-          .map((item) => ({
-            name: formatDate(item.date),
-            portfolio_value: item.portfolio_value,
-          }))
-      } else {
-        let lastMonth = -1
-        let lastYear = -1
-        return data
-          .filter((item) => {
-            const date = new Date(item.date)
-            const month = date.getMonth()
-            const year = date.getFullYear()
-            if (month !== lastMonth || year !== lastYear) {
-              lastMonth = month
-              lastYear = year
-              return true
-            }
-            return false
-          })
-          .map((item) => ({
-            name: formatDate(item.date),
-            portfolio_value: item.portfolio_value,
-          }))
-      }
+      return data.map((item) => ({
+        name: formatDate(item.date),
+        portfolio_value: item.portfolio_value,
+      }))
     }
 
     session?.getToken().then((x) => {
@@ -99,22 +66,36 @@ const StockAreaChart = () => {
 
   const formatDate = (dateString: string | number | Date) => {
     const date = new Date(dateString)
+    const day = date.getDate()
+    const daySuffix = getDaySuffix(day)
     const formattedDate = date.toLocaleDateString('en-US', {
       month: 'short',
       year: '2-digit',
     })
 
-    if (date.getMonth() === 0) {
-      const month = date.toLocaleDateString('en-US', { month: 'short' })
-      return `${month} ${date.getFullYear()}`
+    return `${formattedDate.slice(0, -2)} ${day}${daySuffix} '${formattedDate.slice(-2)}`
+  }
+
+  const getDaySuffix = (day: number) => {
+    if (day >= 11 && day <= 13) return 'th'
+    switch (day % 10) {
+      case 1:
+        return 'st'
+      case 2:
+        return 'nd'
+      case 3:
+        return 'rd'
+      default:
+        return 'th'
     }
-    const newString = formattedDate.slice(0, -2) + "'" + formattedDate.slice(-2)
-    return newString
   }
 
   const CustomizedXAxisTick = ({ x, y, payload }: any) => {
     const date = new Date(payload.value)
-    const isJanuary = date.getMonth() === 0
+    console.log(date)
+    // const isJanuary = date.getMonth() === 0
+    const dateString = payload.value.toString().slice(0, -8)
+    const isJanuary = dateString.includes('Jan')
     return (
       <Text
         x={x}
@@ -127,8 +108,8 @@ const StockAreaChart = () => {
         fontSize={isJanuary ? 18 : 18}
       >
         {!isJanuary
-          ? payload.value.toString().slice(0, -3)
-          : date.getFullYear()}
+          ? dateString
+          : '20' + payload.value.toString().slice(11, 13)}
       </Text>
     )
   }
