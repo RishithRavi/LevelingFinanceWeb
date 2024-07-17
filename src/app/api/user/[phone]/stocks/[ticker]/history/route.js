@@ -6,7 +6,7 @@ export async function GET(request, { params }) {
   const token = request.headers.get('authorization')
   console.log(token)
   const response = await fetch(
-    `https://api.levelingfinance.com/api/user/${phone}/stocks/${ticker}/history/`,
+    `https://api.levelingfinance.com/api/user/${phone}/stocks/${ticker}/history`,
     {
       headers: {
         Authorization: `Bearer ${token}`,
