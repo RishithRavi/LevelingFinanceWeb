@@ -10,6 +10,7 @@ export async function GET(request, { params }) {
     `https://api.levelingfinance.com/api/user/${phone}/stocks/current-value`,
     {
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     },

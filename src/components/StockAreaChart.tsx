@@ -33,6 +33,7 @@ const StockAreaChart = () => {
           `https://api.levelingfinance.com/api/user/${user?.primaryPhoneNumber?.phoneNumber}/stocks/Msft/history`,
           {
             headers: {
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${token}`,
             },
           },

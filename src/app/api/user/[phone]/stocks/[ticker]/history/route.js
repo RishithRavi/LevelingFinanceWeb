@@ -9,6 +9,7 @@ export async function GET(request, { params }) {
     `https://api.levelingfinance.com/api/user/${phone}/stocks/${ticker}/history`,
     {
       headers: {
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     },
