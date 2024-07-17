@@ -29,12 +29,14 @@ const StockAreaChart = () => {
     const fetchData = async (token: string | null) => {
       setLoading(true);
       try {
-        const url = `/api/user/${user?.primaryPhoneNumber?.phoneNumber}/stocks/Msft/history/`;
-        const response = await fetch(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
+        const response = await fetch(
+          `https://api.levelingfinance.com/api/user/${user?.primaryPhoneNumber?.phoneNumber}/stocks/Msft/history/`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
           },
-        });
+        )
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
