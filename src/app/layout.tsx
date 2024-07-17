@@ -19,7 +19,11 @@ export const metadata: Metadata = {
   description:
     'Leveling Finance helps kids and teens learn about investing and financial literacy in a fun and engaging way. Start building your financial future today!',
 }
+import { loadStripe } from '@stripe/stripe-js'
 
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 export default function RootLayout({
   children,
 }: {

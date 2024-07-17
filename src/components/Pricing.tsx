@@ -115,18 +115,20 @@ function Plan({
   featured?: boolean
 }) {
   return (
+    <form action={`/api/checkout_sessions?id=${activePeriod}-${name}-Subscription`} method="POST">
+
     <section
       className={clsx(
         'flex flex-col overflow-hidden rounded-3xl p-6 shadow-lg shadow-gray-900/5',
         featured ? 'order-first bg-gray-900 lg:order-none' : 'bg-white',
       )}
-    >
+      >
       <h3
         className={clsx(
           'flex items-center text-sm font-semibold',
           featured ? 'text-white' : 'text-gray-900',
         )}
-      >
+        >
         <Logomark className={clsx('h-6 w-6 flex-none', logomarkClassName)} />
         <span className="ml-4">{name}</span>
       </h3>
@@ -135,7 +137,7 @@ function Plan({
           'relative mt-5 flex text-3xl tracking-tight',
           featured ? 'text-white' : 'text-gray-900',
         )}
-      >
+        >
         {price.Monthly === price.Annually ? (
           price.Monthly
         ) : (
@@ -145,9 +147,9 @@ function Plan({
               className={clsx(
                 'transition duration-300',
                 activePeriod === 'Annually' &&
-                  'pointer-events-none translate-x-6 select-none opacity-0',
+                'pointer-events-none translate-x-6 select-none opacity-0',
               )}
-            >
+              >
               {price.Monthly}
             </span>
             <span
@@ -155,9 +157,9 @@ function Plan({
               className={clsx(
                 'absolute left-0 top-0 transition duration-300',
                 activePeriod === 'Monthly' &&
-                  'pointer-events-none -translate-x-6 select-none opacity-0',
+                'pointer-events-none -translate-x-6 select-none opacity-0',
               )}
-            >
+              >
               {price.Annually}
             </span>
           </>
@@ -168,7 +170,7 @@ function Plan({
           'mt-3 text-sm',
           featured ? 'text-gray-300' : 'text-gray-700',
         )}
-      >
+        >
         {description}
       </p>
       <div className="order-last mt-6">
@@ -177,10 +179,10 @@ function Plan({
           className={clsx(
             '-my-2 divide-y text-sm',
             featured
-              ? 'divide-gray-800 text-gray-300'
-              : 'divide-gray-200 text-gray-700',
+            ? 'divide-gray-800 text-gray-300'
+            : 'divide-gray-200 text-gray-700',
           )}
-        >
+          >
           {features.map((feature) => (
             <li key={feature} className="flex py-2">
               <CheckIcon
@@ -188,21 +190,23 @@ function Plan({
                   'h-6 w-6 flex-none',
                   featured ? 'text-white' : 'text-indigo-500',
                 )}
-              />
+                />
               <span className="ml-4">{feature}</span>
             </li>
           ))}
         </ul>
       </div>
       <Button
-        href={button.href}
+        // href={button.href}
+        type='submit'
         color={featured ? 'indigo' : 'gray'}
         className="mt-6"
         aria-label={`Get started with the ${name} plan for ${price}`}
-      >
+        >
         {button.label}
       </Button>
     </section>
+        </form>
   )
 }
 
