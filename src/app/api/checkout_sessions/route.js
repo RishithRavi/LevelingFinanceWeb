@@ -37,6 +37,9 @@ export async function POST(request) {
           },
         },
       ],
+      phone_number_collection: {
+        enabled: true,
+      },
       mode: 'subscription',
       success_url: `${origin}/dashboard?success=true`,
       cancel_url: `${origin}/#pricing?canceled=true`,
