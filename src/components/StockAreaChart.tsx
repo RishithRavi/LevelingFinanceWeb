@@ -14,11 +14,10 @@ import Loader from './Loader'
 
 interface DataType {
   name: string
-  close: number
+  portfolio_value: number
 }
 
 const StockAreaChart = () => {
-  // const [token, setToken] = useState();
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState<DataType[]>([])
   const [has, setHas] = useState(false)
@@ -55,28 +54,28 @@ const StockAreaChart = () => {
 
     const transformData = (data: any[]) => {
       const now = new Date()
-      const earliestDate = new Date(data[0].Date)
+      const earliestDate = new Date(data[0].date)
       const diffTime = Math.abs(now.getTime() - earliestDate.getTime())
       const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
       if (diffDays <= 90) {
-        return data.map((item: { Date: any; Close: any }) => ({
-          name: formatDate(item.Date),
-          close: item.Close,
+        return data.map((item) => ({
+          name: formatDate(item.date),
+          portfolio_value: item.portfolio_value,
         }))
       } else if (diffDays <= 365) {
         return data
-          .filter((_: any, index: number) => index % 7 === 0)
-          .map((item: { Date: any; Close: any }) => ({
-            name: formatDate(item.Date),
-            close: item.Close,
+          .filter((_, index) => index % 7 === 0)
+          .map((item) => ({
+            name: formatDate(item.date),
+            portfolio_value: item.portfolio_value,
           }))
       } else {
         let lastMonth = -1
         let lastYear = -1
         return data
-          .filter((item: { Date: string | number | Date }) => {
-            const date = new Date(item.Date)
+          .filter((item) => {
+            const date = new Date(item.date)
             const month = date.getMonth()
             const year = date.getFullYear()
             if (month !== lastMonth || year !== lastYear) {
@@ -86,12 +85,13 @@ const StockAreaChart = () => {
             }
             return false
           })
-          .map((item: { Date: any; Close: any }) => ({
-            name: formatDate(item.Date),
-            close: item.Close,
+          .map((item) => ({
+            name: formatDate(item.date),
+            portfolio_value: item.portfolio_value,
           }))
       }
     }
+
     session?.getToken().then((x) => {
       fetchData(x)
     })
@@ -150,12 +150,12 @@ const StockAreaChart = () => {
         />
         <YAxis />
         <Tooltip
-          label="Close"
+          label="Portfolio Value"
           formatter={(value) => `$${Number(value).toFixed(2)}`}
         />
         <Area
           type="monotone"
-          dataKey="close"
+          dataKey="portfolio_value"
           fill="#8884d8"
           stroke="#8884d8"
           activeDot={{ r: 8 }}
