@@ -30,7 +30,7 @@ const StockAreaChart = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://api.levelingfinance.com/api/user/${user?.primaryPhoneNumber?.phoneNumber}/stocks/Msft/history/`,
+          `https://api.levelingfinance.com/api/user/${user?.primaryPhoneNumber?.phoneNumber}/stocks/Msft/history`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
