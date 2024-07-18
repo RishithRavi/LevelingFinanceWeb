@@ -43,6 +43,12 @@ export default function RootLayout({
         lang="en"
         className={clsx('scroll-smooth bg-gray-50 antialiased', inter.variable)}
       >
+        <head>
+          <meta
+            name="google-adsense-account"
+            content="ca-pub-3578270982337601"
+          ></meta>
+        </head>
         <body>
           <header>
             {/* <SignedOut>
