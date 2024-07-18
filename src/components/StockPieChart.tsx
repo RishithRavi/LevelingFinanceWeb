@@ -41,7 +41,7 @@ const StockPieChart: React.FC = () => {
     session?.getToken().then((x) => {
       return fetchData(x)
     })
-  }, [session, user])
+  }, [session, user?.primaryPhoneNumber?.phoneNumber])
 
   const transformPieData = (data: any[]) => {
     return data.map((item) => ({
@@ -117,7 +117,7 @@ const StockPieChart: React.FC = () => {
           textAnchor={textAnchor}
           fill="#999"
         >
-          {`(% of Holdings ${(percent * 100).toFixed(2)}%)`}
+          {`(${(percent * 100).toFixed(2)}%)`}
         </text>
       </g>
     )
@@ -131,7 +131,7 @@ const StockPieChart: React.FC = () => {
 
   return (
     <ResponsiveContainer width="100%" height={450}>
-      <PieChart width={400} height={400}>
+      <PieChart width={600} height={600}>
         <Pie
           activeIndex={activeIndex}
           activeShape={renderActiveShape}

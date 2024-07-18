@@ -2,9 +2,15 @@ import { type Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import clsx from 'clsx'
 import { GoogleAnalytics } from '@next/third-parties/google'
-import { ClerkProvider, SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 import '@/styles/tailwind.css'
-
+import { Toaster } from 'react-hot-toast'
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
@@ -23,7 +29,9 @@ import { loadStripe } from '@stripe/stripe-js'
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
+const stripePromise = loadStripe(
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
+)
 export default function RootLayout({
   children,
 }: {
@@ -31,7 +39,10 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-          <html lang="en" className={clsx('bg-gray-50 antialiased scroll-smooth', inter.variable)}>
+      <html
+        lang="en"
+        className={clsx('scroll-smooth bg-gray-50 antialiased', inter.variable)}
+      >
         <body>
           <header>
             {/* <SignedOut>
@@ -42,10 +53,11 @@ export default function RootLayout({
             </SignedIn> */}
           </header>
           <main>
+            <Toaster position="top-right" />
             {children}
           </main>
         </body>
-      <GoogleAnalytics gaId='G-XTHEJZRFFL' />
+        <GoogleAnalytics gaId="G-XTHEJZRFFL" />
       </html>
     </ClerkProvider>
   )

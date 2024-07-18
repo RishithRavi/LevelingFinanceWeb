@@ -62,19 +62,18 @@ const StockAreaChart = () => {
     session?.getToken().then((x) => {
       fetchData(x)
     })
+    const formatDate = (dateString: string | number | Date) => {
+      const date = new Date(dateString)
+      const day = date.getDate()
+      const daySuffix = getDaySuffix(day)
+      const formattedDate = date.toLocaleDateString('en-US', {
+        month: 'short',
+        year: '2-digit',
+      })
+
+      return `${formattedDate.slice(0, -2)} ${day}${daySuffix} '${formattedDate.slice(-2)}`
+    }
   }, [session, user])
-
-  const formatDate = (dateString: string | number | Date) => {
-    const date = new Date(dateString)
-    const day = date.getDate()
-    const daySuffix = getDaySuffix(day)
-    const formattedDate = date.toLocaleDateString('en-US', {
-      month: 'short',
-      year: '2-digit',
-    })
-
-    return `${formattedDate.slice(0, -2)} ${day}${daySuffix} '${formattedDate.slice(-2)}`
-  }
 
   const getDaySuffix = (day: number) => {
     if (day >= 11 && day <= 13) return 'th'
@@ -92,7 +91,7 @@ const StockAreaChart = () => {
 
   const CustomizedXAxisTick = ({ x, y, payload }: any) => {
     const date = new Date(payload.value)
-    console.log(date)
+    // console.log(date)
     // const isJanuary = date.getMonth() === 0
     const dateString = payload.value.toString().slice(0, -8)
     const isJanuary = dateString.includes('Jan')
