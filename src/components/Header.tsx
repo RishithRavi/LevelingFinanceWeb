@@ -50,7 +50,7 @@ function MobileNavLink(
   return (
     <PopoverButton
       as={Link}
-      className="block text-base leading-7 tracking-tight text-gray-700 "
+      className="block text-base leading-7 tracking-tight text-gray-700"
       {...props}
     />
   )
@@ -75,7 +75,7 @@ export function Header() {
               {({ open }) => (
                 <>
                   <PopoverButton
-                    className="relative z-10 -m-2 inline-flex items-center rounded-lg stroke-gray-900 p-2 hover:bg-gray-200/50 hover:stroke-gray-600 active:stroke-gray-900 ui-not-focus-visible:outline-none "
+                    className="relative z-10 -m-2 inline-flex items-center rounded-lg stroke-gray-900 p-2 hover:bg-gray-200/50 hover:stroke-gray-600 active:stroke-gray-900 ui-not-focus-visible:outline-none"
                     aria-label="Toggle site navigation"
                   >
                     {({ open }) =>
@@ -122,16 +122,16 @@ export function Header() {
                             <MobileNavLink href="/#faqs">FAQs</MobileNavLink>
                           </div>
                           <div className="mt-8 flex flex-col gap-4">
-                            {
-                            clerk.session?.user ?
-                            <Button href="/login" variant="outline"> 
-                              Log in
-                            </Button> :
-                            <Button href="/login" variant="outline"> 
-                            Log Out
-                          </Button>
-                            }
-                            <Button href="#">Download the app</Button>
+                            {clerk.session?.user ? (
+                              <Button href="/login" variant="outline">
+                                Log in
+                              </Button>
+                            ) : (
+                              <Button href="/login" variant="outline">
+                                Log Out
+                              </Button>
+                            )}
+                            <Button href="/dashboard">Dashboard</Button>
                           </div>
                         </PopoverPanel>
                       </>
@@ -139,18 +139,22 @@ export function Header() {
                   </AnimatePresence>
                 </>
               )}
-            </Popover>{
-
-            }
-                                        {
-                            !clerk.session?.user ?
-                            <Button href="/login" variant="outline"> 
-                              Log in
-                            </Button> :
-                            <Button onClick={()=>{clerk.signOut()}} variant="outline"> 
-                            Log Out
-                          </Button>
-                            }
+            </Popover>
+            {}
+            {!clerk.session?.user ? (
+              <Button href="/login" variant="outline">
+                Log in
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  clerk.signOut()
+                }}
+                variant="outline"
+              >
+                Log Out
+              </Button>
+            )}
             <Button href="/dashboard" className="hidden lg:block">
               Dashboard
             </Button>
