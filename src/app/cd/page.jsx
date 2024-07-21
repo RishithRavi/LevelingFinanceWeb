@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 // pages/cd-explained.tsx
 
 import React from 'react'
