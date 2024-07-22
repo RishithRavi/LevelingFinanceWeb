@@ -21,13 +21,13 @@ const AdsComponent = (props: any) => {
         data-ad-format="auto"
         data-full-width-responsive="true"
       ></ins> */}
-      <div className="bg-black">
-        <AdBanner
-          dataAdFormat="auto"
-          dataFullWidthResponsive={true}
-          dataAdSlot="3701359980"
-        />
-      </div>
+      {/* <div className="bg-black"> */}
+      <AdBanner
+        dataAdFormat="auto"
+        dataFullWidthResponsive={true}
+        dataAdSlot="3701359980"
+      />
+      {/* </div> */}
     </>
   )
 }
