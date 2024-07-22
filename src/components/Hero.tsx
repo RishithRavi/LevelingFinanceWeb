@@ -110,14 +110,12 @@ export function Hero() {
             <p className="mt-6 text-lg text-gray-600">
               Learn the basics of investing with Leveling Finance. Our app makes
               it fun and easy for kids and teens to start building their
-              financial future by investing small amounts every day.
+              financial future by simulating investments and playing through
+              potential real-life financial scenarios
             </p>
             <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4">
               <AppStoreLink />
-              <Button
-                href="/#videos"
-                variant="outline"
-              >
+              <Button href="/#videos" variant="outline">
                 <PlayIcon className="h-6 w-6 flex-none" />
                 <span className="ml-2.5">Watch the video</span>
               </Button>

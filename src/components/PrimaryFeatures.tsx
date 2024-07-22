@@ -39,21 +39,21 @@ const features = [
   {
     name: 'Invite friends for better rewards',
     description:
-      'Invite your friends to Leveling Finance and learn about investing together. Earn fun rewards for each invite!',
+      'Invite your friends to Leveling Finance and learn about investing together through interactive simulations. Earn fun rewards for each invite!',
     icon: DeviceUserIcon,
     screen: InviteScreen,
   },
   {
     name: 'Notifications on stock dips',
     description:
-      'Get notifications when your favorite stocks go on sale! Buy low and learn how to spot great opportunities.',
+      'Get notifications when your favorite stocks go on sale in the simulation! Learn to buy low and spot great opportunities.',
     icon: DeviceNotificationIcon,
     screen: StocksScreen,
   },
   {
-    name: 'Invest what you want',
+    name: 'Simulate any investment amount',
     description:
-      'Start small and grow your investments over time. Learn how to make smart decisions with every dollar.',
+      'Experiment with different investment amounts in a risk-free environment. Learn how to make smart decisions with every dollar.',
     icon: DeviceTouchIcon,
     screen: InvestScreen,
   },
@@ -195,9 +195,7 @@ function InviteScreen(props: ScreenProps) {
     <AppScreen className="w-full">
       <MotionAppScreenHeader {...(props.animated ? headerAnimation : {})}>
         <AppScreen.Title>Invite friends</AppScreen.Title>
-        <AppScreen.Subtitle>
-          Get rewards for each invite.
-        </AppScreen.Subtitle>
+        <AppScreen.Subtitle>Get rewards for each invite.</AppScreen.Subtitle>
       </MotionAppScreenHeader>
       <MotionAppScreenBody
         {...(props.animated ? { ...bodyAnimation, custom: props.custom } : {})}
@@ -576,10 +574,12 @@ export function PrimaryFeatures() {
       <Container>
         <div className="mx-auto max-w-2xl lg:mx-0 lg:max-w-3xl">
           <h2 className="text-3xl font-medium tracking-tight text-white">
-            Learn to invest and grow your savings.
+            Learn to invest and grow your financial skills.
           </h2>
           <p className="mt-2 text-lg text-gray-400">
-            Leveling Finance is built for kids and teens who want to start investing early. Learn the basics, make smart decisions, and watch your savings grow over time.
+            Leveling Finance is built for kids and teens who want to start
+            investing early through engaging simulations. Learn the basics, make
+            smart decisions, and develop strong financial habits for the future.
           </p>
         </div>
       </Container>

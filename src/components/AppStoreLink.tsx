@@ -8,10 +8,10 @@ export function AppStoreLink({
 }) {
   return (
     <Link
-      href="#"
+      href="/dashboard"
       aria-label="Download on the App Store"
       className={clsx(
-        'rounded-lg transition hover:scale-110 ',
+        'rounded-lg transition hover:scale-110',
         color === 'black'
           ? 'bg-gray-800 text-white hover:bg-gray-900'
           : 'bg-white text-gray-900 hover:bg-gray-50',

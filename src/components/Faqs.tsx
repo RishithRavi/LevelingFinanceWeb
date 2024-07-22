@@ -1,11 +1,10 @@
 import { Container } from '@/components/Container'
-
 const faqs = [
   [
     {
       question: 'How do I know the tips are good?',
       answer:
-        'We base our tips on well-researched information and our goal is to help you learn about investing wisely. You can trust that we provide valuable learning experiences.',
+        'We base our tips on well-researched information, aiming to help you learn about investing wisely. You can trust that we provide valuable learning experiences.',
     },
     {
       question: 'Is this app suitable for kids?',
@@ -20,9 +19,9 @@ const faqs = [
   ],
   [
     {
-      question: 'Is there any age limit to using Leveling Finance?',
+      question: 'Is there any age limit?',
       answer:
-        'There is no specific age limit. Our app is designed for K-12 students, but anyone interested in learning about finance can use it.',
+        'There is no specific age limit. Our app is designed for high school students, but anyone interested in learning about finance can use it.',
     },
     {
       question: 'Where is Leveling Finance based?',
@@ -39,7 +38,7 @@ const faqs = [
     {
       question: 'How do I get started?',
       answer:
-        'Simply download the app from the App Store, create an account, and start exploring our learning modules and investment tips.',
+        'Simply sign up & verify with a phone number then just go to the dashboard to start your simulation. Happy learning students!',
     },
     {
       question: 'Can I track my progress?',

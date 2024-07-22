@@ -14,17 +14,12 @@ const plans = [
     featured: false,
     price: { Monthly: '$0', Annually: '$0' },
     description:
-      'You’re new to investing and want to do it right. Get started for free.',
+      'You’re new to investing and want to learn by simulating real-life scenarios. Get started for free.',
     button: {
       label: 'Get started for free',
       href: '/register',
     },
-    features: [
-      'Commission-free trading',
-      'Multi-layered encryption',
-      'Realtime simulation',
-      'Tailored financial advice',
-    ],
+    features: ['Simulation-based learning', 'Realtime market scenarios'],
     logomarkClassName: 'fill-gray-300',
   },
   {
@@ -32,17 +27,17 @@ const plans = [
     featured: false,
     price: { Monthly: '$1 per student', Annually: '$9 per student' },
     description:
-      'You’ve been investing for a while. Invest more and grow your wealth faster.',
+      'Provide students with comprehensive simulation tools to understand investing and finance.',
     button: {
       label: 'Subscribe',
       href: '/register',
     },
     features: [
-      'Commission-free trading',
-      'Multi-layered encryption',
-      'One tip every hour',
-      'Invest up to $15,000 each month',
-      'Basic transaction anonymization',
+      'Simulation-based learning',
+      'Real-time scenario updates',
+      'Create assignments & assessments',
+      'School metrics & challenges',
+      'Educator dashboard',
     ],
     logomarkClassName: 'fill-gray-500',
   },
@@ -51,18 +46,18 @@ const plans = [
     featured: true,
     price: { Monthly: '$0.50 per student', Annually: '$4 per student' },
     description:
-      'You’ve got a huge amount of assets but it’s not enough. To the moon.',
+      'Equip a large number of students with advanced simulation tools and resources.',
     button: {
       label: 'Subscribe',
       href: '/register',
     },
     features: [
-      'Commission-free trading',
-      'Multi-layered encryption',
-      'Real-time tip notifications',
-      'No investment limits',
-      'Advanced transaction anonymization',
-      'Automated tax-loss harvesting',
+      'Simulation-based learning',
+      'Real-time scenario updates',
+      'Create assignments & assessments',
+      'District-wide metrics & challenges',
+      'Educator + Admin dashboard',
+      'Custom scenarios',
     ],
     logomarkClassName: 'fill-indigo-500',
   },
@@ -115,98 +110,99 @@ function Plan({
   featured?: boolean
 }) {
   return (
-    <form action={`/api/checkout_sessions?id=${activePeriod}-${name}-Subscription`} method="POST">
-
-    <section
-      className={clsx(
-        'flex flex-col overflow-hidden rounded-3xl p-6 shadow-lg shadow-gray-900/5',
-        featured ? 'order-first bg-gray-900 lg:order-none' : 'bg-white',
-      )}
+    <form
+      action={`/api/checkout_sessions?id=${activePeriod}-${name}-Subscription`}
+      method="POST"
+    >
+      <section
+        className={clsx(
+          'flex flex-col overflow-hidden rounded-3xl p-6 shadow-lg shadow-gray-900/5',
+          featured ? 'order-first bg-gray-900 lg:order-none' : 'bg-white',
+        )}
       >
-      <h3
-        className={clsx(
-          'flex items-center text-sm font-semibold',
-          featured ? 'text-white' : 'text-gray-900',
-        )}
-        >
-        <Logomark className={clsx('h-6 w-6 flex-none', logomarkClassName)} />
-        <span className="ml-4">{name}</span>
-      </h3>
-      <p
-        className={clsx(
-          'relative mt-5 flex text-3xl tracking-tight',
-          featured ? 'text-white' : 'text-gray-900',
-        )}
-        >
-        {price.Monthly === price.Annually ? (
-          price.Monthly
-        ) : (
-          <>
-            <span
-              aria-hidden={activePeriod === 'Annually'}
-              className={clsx(
-                'transition duration-300',
-                activePeriod === 'Annually' &&
-                'pointer-events-none translate-x-6 select-none opacity-0',
-              )}
-              >
-              {price.Monthly}
-            </span>
-            <span
-              aria-hidden={activePeriod === 'Monthly'}
-              className={clsx(
-                'absolute left-0 top-0 transition duration-300',
-                activePeriod === 'Monthly' &&
-                'pointer-events-none -translate-x-6 select-none opacity-0',
-              )}
-              >
-              {price.Annually}
-            </span>
-          </>
-        )}
-      </p>
-      <p
-        className={clsx(
-          'mt-3 text-sm',
-          featured ? 'text-gray-300' : 'text-gray-700',
-        )}
-        >
-        {description}
-      </p>
-      <div className="order-last mt-6">
-        <ul
-          role="list"
+        <h3
           className={clsx(
-            '-my-2 divide-y text-sm',
-            featured
-            ? 'divide-gray-800 text-gray-300'
-            : 'divide-gray-200 text-gray-700',
+            'flex items-center text-sm font-semibold',
+            featured ? 'text-white' : 'text-gray-900',
           )}
-          >
-          {features.map((feature) => (
-            <li key={feature} className="flex py-2">
-              <CheckIcon
-                className={clsx(
-                  'h-6 w-6 flex-none',
-                  featured ? 'text-white' : 'text-indigo-500',
-                )}
-                />
-              <span className="ml-4">{feature}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <Button
-        // href={button.href}
-        type='submit'
-        color={featured ? 'indigo' : 'gray'}
-        className="mt-6"
-        aria-label={`Get started with the ${name} plan for ${price}`}
         >
-        {button.label}
-      </Button>
-    </section>
-        </form>
+          <Logomark className={clsx('h-6 w-6 flex-none', logomarkClassName)} />
+          <span className="ml-4">{name}</span>
+        </h3>
+        <p
+          className={clsx(
+            'relative mt-5 flex text-3xl tracking-tight',
+            featured ? 'text-white' : 'text-gray-900',
+          )}
+        >
+          {price.Monthly === price.Annually ? (
+            price.Monthly
+          ) : (
+            <>
+              <span
+                aria-hidden={activePeriod === 'Annually'}
+                className={clsx(
+                  'transition duration-300',
+                  activePeriod === 'Annually' &&
+                    'pointer-events-none translate-x-6 select-none opacity-0',
+                )}
+              >
+                {price.Monthly}
+              </span>
+              <span
+                aria-hidden={activePeriod === 'Monthly'}
+                className={clsx(
+                  'absolute left-0 top-0 transition duration-300',
+                  activePeriod === 'Monthly' &&
+                    'pointer-events-none -translate-x-6 select-none opacity-0',
+                )}
+              >
+                {price.Annually}
+              </span>
+            </>
+          )}
+        </p>
+        <p
+          className={clsx(
+            'mt-3 text-sm',
+            featured ? 'text-gray-300' : 'text-gray-700',
+          )}
+        >
+          {description}
+        </p>
+        <div className="order-last mt-6">
+          <ul
+            role="list"
+            className={clsx(
+              '-my-2 divide-y text-sm',
+              featured
+                ? 'divide-gray-800 text-gray-300'
+                : 'divide-gray-200 text-gray-700',
+            )}
+          >
+            {features.map((feature) => (
+              <li key={feature} className="flex py-2">
+                <CheckIcon
+                  className={clsx(
+                    'h-6 w-6 flex-none',
+                    featured ? 'text-white' : 'text-indigo-500',
+                  )}
+                />
+                <span className="ml-4">{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <Button
+          type="submit"
+          color={featured ? 'indigo' : 'gray'}
+          className="mt-6"
+          aria-label={`Get started with the ${name} plan for ${price}`}
+        >
+          {button.label}
+        </Button>
+      </section>
+    </form>
   )
 }
 
@@ -227,10 +223,11 @@ export function Pricing() {
             id="pricing-title"
             className="text-3xl font-medium tracking-tight text-gray-900"
           >
-           Choose your plan
+            Choose your plan
           </h2>
           <p className="mt-2 text-lg text-gray-600">
-          Leveling Finance offers flexible plans for individuals and organizations.
+            Leveling Finance offers flexible plans for individuals and
+            organizations.
           </p>
         </div>
 

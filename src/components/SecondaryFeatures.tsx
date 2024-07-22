@@ -1,42 +1,41 @@
 import { useId } from 'react'
 
 import { Container } from '@/components/Container'
-
 const features = [
   {
-    name: 'Invest any amount',
+    name: 'Simulate any investment amount',
     description:
-      'Whether it’s $1 or $100, start small and see your savings grow!',
+      'Experiment with as little as $1 or as much as $100,000 in a risk-free environment!',
     icon: DeviceArrowIcon,
   },
   {
-    name: 'Build a balanced portfolio',
+    name: 'Build a diversified portfolio',
     description:
-      'Learn to invest in different areas to find the best opportunities.',
+      'Learn to spread your investments across different assets to optimize returns.',
     icon: DeviceCardsIcon,
   },
   {
-    name: 'Trade in real-time',
+    name: 'Trade with real-time market data',
     description:
-      'Get updates on stock moves and learn how to act quickly.',
+      'Experience the thrill of live market trading and learn to make quick, informed decisions.',
     icon: DeviceClockIcon,
   },
   {
-    name: 'Profit from your network',
+    name: 'Leverage your network',
     description:
-      'Invite friends to Leveling Finance and earn fun rewards together.',
+      'Invite friends to join the simulation and compete or collaborate for the best outcomes.',
     icon: DeviceListIcon,
   },
   {
-    name: 'Encrypted and anonymized',
+    name: 'Scenario-based learning',
     description:
-      'Your information is secure with the latest security technology.',
-    icon: DeviceLockIcon,
+      'Engage in various financial scenarios to better understand market behaviors and strategies.',
+    icon: DeviceBookIcon,
   },
   {
-    name: 'Portfolio tracking',
+    name: 'Track your portfolio performance',
     description:
-      'Watch your investments grow and track your progress over time.',
+      'Monitor the growth and progress of your simulated investments over time.',
     icon: DeviceChartIcon,
   },
 ]
@@ -159,6 +158,19 @@ function DeviceLockIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     </svg>
   )
 }
+function DeviceBookIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+  return (
+    <svg viewBox="0 0 32 32" aria-hidden="true" {...props}>
+      <circle cx={16} cy={16} r={16} fill="#A3A3A3" fillOpacity={0.2} />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M7 4a2 2 0 012-2h14a2 2 0 012 2v24a2 2 0 01-2 2H9a2 2 0 01-2-2V4zm2 0v24h14V4H9zm2 2h10v2H11V6zm0 4h10v2H11v-2zm0 4h10v2H11v-2zm0 4h10v2H11v-2z"
+        fill="#737373"
+      />
+    </svg>
+  )
+}
 
 function DeviceChartIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -196,10 +208,12 @@ export function SecondaryFeatures() {
       <Container>
         <div className="mx-auto max-w-2xl sm:text-center">
           <h2 className="text-3xl font-medium tracking-tight text-gray-900">
-            Start building your investment portfolio now!
+            Start building your financial knowledge now!
           </h2>
           <p className="mt-2 text-lg text-gray-600">
-            With Leveling Finance, kids and teens can start investing early and secure their financial future.
+            With Leveling Finance, kids and teens can explore the world of
+            investments through engaging simulations and practical learning
+            experiences.
           </p>
         </div>
         <ul
