@@ -26,6 +26,7 @@ export const metadata: Metadata = {
     'Leveling Finance helps kids and teens learn about investing and financial literacy in a fun and engaging way. Start building your financial future today!',
 }
 import { loadStripe } from '@stripe/stripe-js'
+import AdSense from '@/components/AdSense'
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -44,10 +45,11 @@ export default function RootLayout({
         className={clsx('scroll-smooth bg-gray-50 antialiased', inter.variable)}
       >
         <head>
-          <meta
+          {/* <meta
             name="google-adsense-account"
             content="ca-pub-3578270982337601"
-          ></meta>
+          ></meta> */}
+          <AdSense pId="ca-pub-3578270982337601" />
         </head>
         <body>
           <header>
