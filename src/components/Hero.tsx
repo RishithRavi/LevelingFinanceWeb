@@ -104,16 +104,16 @@ export function Hero() {
       <Container>
         <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:gap-y-20">
           <div className="relative z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-6 xl:col-span-6">
-            <h1 className="text-4xl font-medium tracking-tight text-gray-900">
+            <h1 className="animate-slidein text-4xl font-medium tracking-tight text-gray-900 [--slidein-delay:400ms]">
               Start investing for your future today!
             </h1>
-            <p className="mt-6 text-lg text-gray-600">
+            <p className="animate-slidein mt-6 text-lg text-gray-600 [--slidein-delay:500ms]">
               Learn the basics of investing with Leveling Finance. Our app makes
               it fun and easy for kids and teens to start building their
               financial future by simulating investments and playing through
               potential real-life financial scenarios
             </p>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4">
+            <div className="animate-slidein700 mt-8 flex flex-wrap gap-x-6 gap-y-4">
               <AppStoreLink />
               <Button href="/#videos" variant="outline">
                 <PlayIcon className="h-6 w-6 flex-none" />

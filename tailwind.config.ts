@@ -30,6 +30,7 @@ export default {
         'spin-reverse': 'spin-reverse 1s linear infinite',
         'spin-reverse-slow': 'spin-reverse 4s linear infinite',
         'spin-reverse-slower': 'spin-reverse 6s linear infinite',
+        slidein: "slidein 1s ease var(--slidein-delay, 0) forwards",
       },
       borderRadius: {
         '4xl': '2rem',
@@ -58,6 +59,16 @@ export default {
         'spin-reverse': {
           to: {
             transform: 'rotate(-360deg)',
+          },
+        },
+        slidein: {
+          from: {
+            opacity: "0",
+            transform: "translateY(-10px)",
+          },
+          to: {
+            opacity: "1",
+            transform: "translateY(0)",
           },
         },
       },
