@@ -30,7 +30,8 @@ export default {
         'spin-reverse': 'spin-reverse 1s linear infinite',
         'spin-reverse-slow': 'spin-reverse 4s linear infinite',
         'spin-reverse-slower': 'spin-reverse 6s linear infinite',
-        slidein: "slidein 1s ease var(--slidein-delay, 0) forwards",
+        slidein: 'slidein 1s ease var(--slidein-delay, 0) forwards',
+        fall: 'fall 0.5s ease-in-out forwards',
       },
       borderRadius: {
         '4xl': '2rem',
@@ -63,12 +64,22 @@ export default {
         },
         slidein: {
           from: {
-            opacity: "0",
-            transform: "translateY(-10px)",
+            opacity: '0',
+            transform: 'translateY(-10px)',
           },
           to: {
-            opacity: "1",
-            transform: "translateY(0)",
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
+        },
+        fall: {
+          from: {
+            transform: 'translateY(-200%)',
+            opacity: '0',
+          },
+          to: {
+            transform: 'translateY(0)',
+            opacity: '1',
           },
         },
       },
@@ -77,5 +88,9 @@ export default {
       },
     },
   },
-  plugins: [formsPlugin, headlessuiPlugin,  require('@tailwindcss/aspect-ratio'),],
+  plugins: [
+    formsPlugin,
+    headlessuiPlugin,
+    require('@tailwindcss/aspect-ratio'),
+  ],
 } satisfies Config
