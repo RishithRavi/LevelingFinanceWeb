@@ -8,7 +8,7 @@ export default function useAutoScroll(ref) {
     el.innerHTML += cloned
 
     let autoScroll = setInterval(() => {
-      el.scrollLeft += 1
+      el.scrollLeft += 1.2
       if (el.scrollLeft >= el.scrollWidth / 2) {
         el.scrollLeft = 0
       }

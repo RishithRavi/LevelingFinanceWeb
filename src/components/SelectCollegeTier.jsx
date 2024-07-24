@@ -15,7 +15,7 @@ const tiers = [
     imageUrl: '/images/tier3.jpg',
   },
   {
-    title: 'Instate Public',
+    title: 'In-state Public',
     description: 'Top ranked colleges and universities',
     imageUrl: '/images/tier1.jpg', // Add your image URLs here
   },
@@ -52,15 +52,28 @@ export default function SelectCollegeTier({ onNext }) {
         </h1>
       </div>
       <div className="flex flex-wrap justify-center space-x-6 space-y-6 p-4">
-        {tiers.map((tier, index) => (
-          <div
-            key={index}
-            className="tier-card animate-fall flex w-[300px] transform cursor-pointer flex-col items-center justify-center p-4 opacity-0 transition-all hover:scale-110"
-            onClick={() => handleCardClick(tier.title)}
-          >
-            <TiltCard key={index} text={tier} />
-          </div>
-        ))}
+        {tiers.map((tier, index) => {
+          if (index === 0) {
+            return (
+              <div
+                key={index}
+                className="tier-card mt-6 flex w-[300px] transform animate-fall cursor-pointer flex-col items-center justify-center p-4 opacity-0 transition-all hover:scale-110"
+                onClick={() => handleCardClick(tier.title)}
+              >
+                <TiltCard key={index} text={tier} />
+              </div>
+            )
+          }
+          return (
+            <div
+              key={index}
+              className="tier-card flex w-[300px] transform animate-fall cursor-pointer flex-col items-center justify-center p-4 opacity-0 transition-all hover:scale-110"
+              onClick={() => handleCardClick(tier.title)}
+            >
+              <TiltCard key={index} text={tier} />
+            </div>
+          )
+        })}
       </div>
     </div>
   )
