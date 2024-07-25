@@ -44,17 +44,17 @@ export default function SelectCollegeTier({ onNext }) {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-blue-100 p-4 md:p-8">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-blue-100 md:p-8">
       <div className="mb-8 text-center">
         <h1 className="mb-10 animate-slidein text-4xl font-bold text-indigo-600 opacity-0 [--slidein-delay:200ms] md:text-6xl">
           Choose Your College Tier
         </h1>
       </div>
-      <div className="flex flex-wrap justify-center gap-6 p-4">
+      <div className="flex flex-wrap justify-center gap-6 px-3">
         {tiers.map((tier, index) => (
           <div
             key={index}
-            className={`tier-card ${index === 0 ? 'mb-0' : ''} flex w-[250px] transform animate-fall cursor-pointer flex-col items-center justify-center p-4 opacity-0 transition-all hover:scale-110 md:w-[300px]`}
+            className={`tier-card ${index === 0 ? 'mb-0' : ''} flex w-[150px] transform animate-fall cursor-pointer flex-col items-center justify-center p-4 opacity-0 transition-all hover:scale-110 md:w-[300px]`}
             onClick={() => handleCardClick(tier.title)}
           >
             <TiltCard key={index} text={tier} />
@@ -110,7 +110,7 @@ const TiltCard = ({ text }) => {
         transformStyle: 'preserve-3d',
         transform,
       }}
-      className="relative h-80 w-60 rounded-xl bg-gradient-to-br from-indigo-300 md:h-96 md:w-72"
+      className="relative h-52 w-40 rounded-xl bg-gradient-to-br from-indigo-300 md:h-80 md:w-60 lg:h-96 lg:w-72"
     >
       <div
         style={{

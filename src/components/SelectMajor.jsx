@@ -82,7 +82,7 @@ export default function SelectMajor({ meta }) {
           {majors.map((major, index) => (
             <div
               key={index}
-              className="min-w-[250px] flex-shrink-0 rounded-lg bg-indigo-500 p-4 text-white shadow-lg transition hover:scale-110 md:min-w-[300px]"
+              className="min-w-[250px] flex-shrink-0 rounded-lg bg-indigo-500 p-4 text-white shadow-lg transition md:min-w-[300px]"
             >
               <h2 className="mb-2 select-none text-lg font-bold md:text-xl">
                 {major.title}
@@ -92,7 +92,7 @@ export default function SelectMajor({ meta }) {
                 Starting Salary: {major.salary}
                 <button
                   id={major.title}
-                  className="ml-4 rounded-full bg-white px-3 py-1 font-bold italic text-indigo-500 transition hover:scale-110"
+                  className="ml-4 rounded-full bg-white px-3 py-1 font-bold italic text-indigo-500 transition"
                 >
                   Let&apos;s do it
                 </button>

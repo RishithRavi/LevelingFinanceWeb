@@ -55,18 +55,18 @@ export default function FallingBallsGame({ onFinish }) {
       </h1>
       <div className="absolute left-0 top-0 h-full w-full">
         {balls.map((ball) => (
-          <div
-            key={ball.id}
-            onClick={() => handleBallClick(ball.id)}
-            className="absolute flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-indigo-500 md:h-24 md:w-24"
-            style={{ top: ball.y, left: ball.x }}
-          >
-            <div className="relative">
-              <p className="absolute inset-0 flex select-none items-center justify-center text-xs text-white md:text-sm">
-                {ball.text}
-              </p>
+          <button key={ball.id} onClick={() => handleBallClick(ball.id)}>
+            <div
+              className="absolute flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-indigo-500 md:h-28 md:w-28"
+              style={{ top: ball.y, left: ball.x }}
+            >
+              <div className="relative">
+                <p className="absolute inset-0 flex select-none items-center justify-center text-xs text-white md:text-2xl">
+                  {ball.text}
+                </p>
+              </div>
             </div>
-          </div>
+          </button>
         ))}
       </div>
       <div className="mb-4 text-xl md:text-2xl">Time Left: {timeLeft}s</div>
