@@ -40,13 +40,19 @@ export default function Home() {
       {step === 4 && <FallingBallsGame onFinish={handleFallingBallsFinish} />}
       {step === 5 && (
         <div className="flex min-h-screen flex-col items-center justify-center bg-blue-100">
-          <Confetti />
-          <h1 className="mb-4 animate-fall text-center text-7xl font-extrabold text-indigo-600">
+          <Confetti width={window.innerWidth} />
+          <h1 className="mb-4 animate-slidein text-center text-4xl font-extrabold text-indigo-600 opacity-0 [--slidein-delay:200ms] md:text-7xl">
             Congratulations on Graduating!
           </h1>
-          <div className="mb-2 text-2xl">Major: {major}</div>
-          <div className="mb-2 text-2xl">GPA: {gpa}</div>
-          <div className="mb-2 text-2xl">Experience: {experience}</div>
+          <div className="mb-2 animate-slidein text-lg opacity-0 [--slidein-delay:200ms] md:text-2xl">
+            Major: {major}
+          </div>
+          <div className="mb-2 animate-slidein text-lg opacity-0 [--slidein-delay:200ms] md:text-2xl">
+            GPA: {gpa}
+          </div>
+          <div className="mb-2 animate-slidein text-lg opacity-0 [--slidein-delay:200ms] md:text-2xl">
+            Experience: {experience}
+          </div>
         </div>
       )}
     </div>

@@ -1,6 +1,5 @@
 'use client'
 import React, { useEffect, useRef } from 'react'
-
 import {
   motion,
   useMotionTemplate,
@@ -45,35 +44,22 @@ export default function SelectCollegeTier({ onNext }) {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-blue-100">
+    <div className="flex min-h-screen flex-col items-center justify-center bg-blue-100 p-4 md:p-8">
       <div className="mb-8 text-center">
-        <h1 className="mb-10 animate-slidein text-6xl font-bold text-indigo-600 opacity-0 [--slidein-delay:200ms]">
+        <h1 className="mb-10 animate-slidein text-4xl font-bold text-indigo-600 opacity-0 [--slidein-delay:200ms] md:text-6xl">
           Choose Your College Tier
         </h1>
       </div>
-      <div className="flex flex-wrap justify-center space-x-6 space-y-6 p-4">
-        {tiers.map((tier, index) => {
-          if (index === 0) {
-            return (
-              <div
-                key={index}
-                className="tier-card mt-6 flex w-[300px] transform animate-fall cursor-pointer flex-col items-center justify-center p-4 opacity-0 transition-all hover:scale-110"
-                onClick={() => handleCardClick(tier.title)}
-              >
-                <TiltCard key={index} text={tier} />
-              </div>
-            )
-          }
-          return (
-            <div
-              key={index}
-              className="tier-card flex w-[300px] transform animate-fall cursor-pointer flex-col items-center justify-center p-4 opacity-0 transition-all hover:scale-110"
-              onClick={() => handleCardClick(tier.title)}
-            >
-              <TiltCard key={index} text={tier} />
-            </div>
-          )
-        })}
+      <div className="flex flex-wrap justify-center gap-6 p-4">
+        {tiers.map((tier, index) => (
+          <div
+            key={index}
+            className={`tier-card ${index === 0 ? 'mb-0' : ''} flex w-[250px] transform animate-fall cursor-pointer flex-col items-center justify-center p-4 opacity-0 transition-all hover:scale-110 md:w-[300px]`}
+            onClick={() => handleCardClick(tier.title)}
+          >
+            <TiltCard key={index} text={tier} />
+          </div>
+        ))}
       </div>
     </div>
   )
@@ -124,7 +110,7 @@ const TiltCard = ({ text }) => {
         transformStyle: 'preserve-3d',
         transform,
       }}
-      className="relative h-96 w-72 rounded-xl bg-gradient-to-br from-indigo-300"
+      className="relative h-80 w-60 rounded-xl bg-gradient-to-br from-indigo-300 md:h-96 md:w-72"
     >
       <div
         style={{
@@ -137,7 +123,7 @@ const TiltCard = ({ text }) => {
           style={{
             transform: 'translateZ(50px)',
           }}
-          className="white text-center text-2xl font-bold text-white"
+          className="text-center text-xl font-bold text-white md:text-2xl"
         >
           {text.title}
         </p>

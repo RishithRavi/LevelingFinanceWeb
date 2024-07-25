@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 
-export default function useAutoScroll(ref) {
+export default function useAutoScroll(ref, vert) {
   useEffect(() => {
     const el = ref.current
-
-    const cloned = el.innerHTML
-    el.innerHTML += cloned
-
+    if (vert) {
+      const cloned = el.innerHTML
+      el.innerHTML += cloned
+    }
     let autoScroll = setInterval(() => {
       el.scrollLeft += 1.2
       if (el.scrollLeft >= el.scrollWidth / 2) {
