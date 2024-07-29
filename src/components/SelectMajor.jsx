@@ -32,26 +32,29 @@ const majors = [
 ]
 
 export default function SelectMajor({ meta }) {
-  const [windowSize, setWindowSize] = useState({
-    vert: window.innerWidth > 450,
-  })
+  const [windowSize, setWindowSize] = useState(false)
+
+  useEffect(() => {
+    setWindowSize(window.visualViewport.width > 450)
+  }, [])
+
   // if(windowSize.width > 450)
   const scrollRef = useRef(null)
 
   useDraggableScroll(scrollRef, meta)
-  useAutoScroll(scrollRef, windowSize.vert)
+  useAutoScroll(scrollRef)
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-blue-100 p-4 md:p-8">
+    <div className="flex min-h-screen flex-col items-center justify-center p-4 md:p-8">
       <div className="mb-8 text-center">
-        <h1 className="mb-10 animate-slidein text-4xl font-bold text-indigo-600 opacity-0 [--slidein-delay:200ms] md:text-6xl">
+        <h1 className="mb-10 animate-slidein text-4xl font-bold text-indigo-600 opacity-0 [--slidein-delay:800ms] md:text-6xl">
           Choose Your Major
         </h1>
       </div>
-      {windowSize.vert ? (
+      {windowSize ? (
         <div
           ref={scrollRef}
-          className="scroll-container flex w-full max-w-screen-2xl animate-slidein space-x-6 overflow-x-hidden p-4 opacity-0 [--slidein-delay:400ms] hover:cursor-grab"
+          className="scroll-container flex w-full max-w-screen-2xl animate-slidein space-x-6 overflow-x-hidden p-4 opacity-0 [--slidein-delay:1000ms] hover:cursor-grab"
         >
           {majors.map((major, index) => (
             <div

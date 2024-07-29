@@ -49,7 +49,7 @@ export default function FallingBallsGame({ onFinish }) {
   }
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center bg-blue-100 p-4 md:p-8">
+    <div className="justify-cente relative flex min-h-screen flex-col items-center p-4 md:p-8">
       <h1 className="mb-4 text-center text-2xl font-bold md:text-4xl">
         Catch the Balls!
       </h1>

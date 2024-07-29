@@ -1,6 +1,7 @@
 import headlessuiPlugin from '@headlessui/tailwindcss'
 import formsPlugin from '@tailwindcss/forms'
 import { type Config } from 'tailwindcss'
+const plugin = require('tailwindcss/plugin')
 
 export default {
   darkMode: 'class',
@@ -32,6 +33,10 @@ export default {
         'spin-reverse-slower': 'spin-reverse 6s linear infinite',
         slidein: 'slidein 1s ease var(--slidein-delay, 0) forwards',
         fall: 'fall 0.5s ease-in-out forwards',
+        'fall-slow': 'fall 0.5s ease-in-out forwards',
+        'fall-slower': 'fall 0.5s ease-in-out forwards',
+                // tailwind.config.js code
+                    shimmer: "shimmer 2s linear infinite"
       },
       borderRadius: {
         '4xl': '2rem',
@@ -82,6 +87,14 @@ export default {
             opacity: '1',
           },
         },
+        shimmer: {
+          from: {
+            "backgroundPosition": "0 0"
+          },
+          to: {
+            "backgroundPosition": "-200% 0"
+          }
+        }
       },
       maxWidth: {
         '2xl': '40rem',
