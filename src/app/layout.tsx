@@ -9,7 +9,7 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
-import '../styles/tailwind.css'
+import '@/styles/tailwind.css'
 import { Toaster } from 'react-hot-toast'
 const inter = Inter({
   subsets: ['latin'],
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     'Leveling Finance helps kids and teens learn about investing and financial literacy in a fun and engaging way. Start building your financial future today!',
 }
 import { loadStripe } from '@stripe/stripe-js'
-import AdSense from '../components/AdSense'
+import AdSense from '@/components/AdSense'
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
